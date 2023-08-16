@@ -1,6 +1,8 @@
 import client.Client;
 import courier.ApiCourier;
 import courier.CourierCustomData;
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
@@ -19,6 +21,8 @@ public class DeleteCourierTest {
         RestAssured.baseURI = Client.BASE_URI;
     }
     @Test
+    @DisplayName("Курьера можно удалить")
+    @Description("Проверка, что созданный курьер успешно удаляется")
     public void deleteCourierTest() {
         ValidatableResponse response = apiCourier.courierReg(CourierCustomData.getCourierNew());
         response.assertThat().body("ok", is(true)).and().statusCode(SC_CREATED);

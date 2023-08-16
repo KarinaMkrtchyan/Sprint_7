@@ -36,18 +36,20 @@ public class ApiCourier extends Client {
     }
 
     public void courierDeleteWithoutPassword(Courier courier) {
-        Integer id = given()
-                .spec(Client.requestSpecification())
-                .body(courier)
-                .when()
-                .post("/api/v1/courier/login")
-                .then().log().all().extract().body().<Integer>path("id");
-        if (id != null) {
-            given()
+        if (courier.getId() != null) {
+            Integer id = given()
                     .spec(Client.requestSpecification())
+                    .body(courier)
                     .when()
-                    .delete("/api/v1/courier/" + id)
-                    .then().statusCode(200).log().all();
+                    .post("/api/v1/courier/login")
+                    .then().log().all().extract().body().<Integer>path("id");
+            if (id != null) {
+                given()
+                        .spec(Client.requestSpecification())
+                        .when()
+                        .delete("/api/v1/courier/" + id)
+                        .then().statusCode(200).log().all();
+            }
         }
     }
 

@@ -1,4 +1,6 @@
 import client.Client;
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import order.Order;
@@ -38,6 +40,8 @@ public class CreateOrderTest {
     }
 
     @Test
+    @DisplayName("Создание заказа с выбором цвета")
+    @Description("Проверка, что можно создать заказ: c серым цветом, с черным цветом, с выбором двух цветов, без выбора цвета")
     public void paramCreateOrderTest() {
         Order order = new Order("Анджелина", "Джоли", "Солнечная, 55", "Горьковская", "791256532665", 3, "2023-06-10", "Спасибо", color);
         ValidatableResponse response = apiOrder.createOrder(order);

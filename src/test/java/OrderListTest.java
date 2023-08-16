@@ -1,4 +1,6 @@
 import client.Client;
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import order.ApiOrder;
@@ -15,6 +17,8 @@ public class OrderListTest {
     }
 
     @Test
+    @DisplayName("Получение списка заказов")
+    @Description("Проверка, что в тело ответа возвращается список заказов")
     public void getOrderListTest() {
         ValidatableResponse response = given()
                 .spec(Client.requestSpecification())

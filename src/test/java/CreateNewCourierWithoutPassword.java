@@ -1,6 +1,8 @@
 import client.Client;
 import courier.Courier;
 import courier.ApiCourier;
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
@@ -20,6 +22,8 @@ public class CreateNewCourierWithoutPassword {
         RestAssured.baseURI = Client.BASE_URI;
     }
     @Test
+    @DisplayName("Нельзя зарегистрировать курьера без пароля")
+    @Description("Проверка, что появится ошибка при попытке создания курьера без заполнения пароля")
     public void regCourierWithoutPasswordTest() {
         ValidatableResponse response = apiCourier.courierReg(courier);
         response.statusCode(SC_BAD_REQUEST)
